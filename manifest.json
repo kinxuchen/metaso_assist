@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "Metaso Assistant",
+  "version": "1.0",
+  "description": "为 metaso.cn 提供快捷键辅助功能",
+  "permissions": ["scripting", "tabs", "activeTab"],
+  "host_permissions": ["https://metaso.cn/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "click-home-button": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+H",
+        "mac": "Command+Shift+H"
+      },
+      "description": "点击主页按钮"
+    },
+    "click-ask-more-button": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "Command+Shift+A"
+      },
+      "description": "点击追问按钮"
+    }
+  },
+  "icons": {
+    "16": "assets/logo.png",
+    "48": "assets/logo.png",
+    "128": "assets/logo.png"
+  },
+  "content_scripts": [{
+    "matches": [
+      "https://metaso.cn/*",
+      "https://*.metaso.cn/*",
+      "http://metaso.cn/*",
+      "http://*.metaso.cn/*"
+    ],
+    "js": ["content.js"],
+    "run_at": "document_idle"
+  }]
+}
