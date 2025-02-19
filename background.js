@@ -1,6 +1,7 @@
 chrome.commands.onCommand.addListener(async (command) => {
   if (command === 'click-ask-more-button') {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    console.log(tab);
     
     if (tab && tab.url.startsWith('https://metaso.cn')) {
       chrome.tabs.sendMessage(tab.id, { action: 'clickAskMoreButton' }, (response) => {
@@ -20,6 +21,17 @@ chrome.commands.onCommand.addListener(async (command) => {
     
     if (tab && tab.url.startsWith('https://metaso.cn')) {
       // 发送消息给 content script
+      chrome.tabs.sendMessage(tab.id, { action: 'clickHomeButton' }, (response) => {
+        if (chrome.runtime.lastError) {
+          console.error('Error:', chrome.runtime.lastError);
+          return;
+        }
+        
+        if (!response.success) {
+          console.error('Failed to click home button:', response.error);
+        }
+      });
+    } else if (tab && tab.url.startsWith('https://yuanbao.tencent.com')) {
       chrome.tabs.sendMessage(tab.id, { action: 'clickHomeButton' }, (response) => {
         if (chrome.runtime.lastError) {
           console.error('Error:', chrome.runtime.lastError);

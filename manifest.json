@@ -4,7 +4,7 @@
   "version": "1.0",
   "description": "为 metaso.cn 提供快捷键辅助功能",
   "permissions": ["scripting", "tabs", "activeTab"],
-  "host_permissions": ["https://metaso.cn/*"],
+  "host_permissions": ["https://metaso.cn/*", "https://yuanbao.tencent.com/*"],
   "background": {
     "service_worker": "background.js"
   },
@@ -34,9 +34,11 @@
       "https://metaso.cn/*",
       "https://*.metaso.cn/*",
       "http://metaso.cn/*",
-      "http://*.metaso.cn/*"
+      "http://*.metaso.cn/*",
+      "https://yuanbao.tencent.com/*"
     ],
     "js": ["content.js"],
+    "type": "module",
     "run_at": "document_idle"
   }]
 }
